@@ -1,0 +1,142 @@
+from flask_wtf import FlaskForm
+from wtforms import StringField
+from wtforms.validators import DataRequired, Email, Length, regexp
+from pkg.password import password_pattern
+from marshmallow import Schema, fields
+
+class PasswordLoginReq(FlaskForm):
+    """账号密码登陆请求结构"""
+    email = StringField('email', validators=[
+        DataRequired(),
+        Email("登陆邮箱格式错误"),
+        Length(min=3, max=254, message="登录邮箱长度在3~254之间")
+    ])
+    password = StringField('password', validators=[
+        DataRequired("密码不能为空"),
+    ])
+
+class PasswordLoginResp(Schema):
+    """账号密码授权认证响应结构"""
+    access_token = fields.String(allow_none=True)
+    expire_at = fields.Integer(allow_none=True)
+    challenge_required = fields.Boolean()
+    challenge_id = fields.String(allow_none=True)
+    challenge_type = fields.String(allow_none=True)
+    masked_email = fields.String(allow_none=True)
+    risk_reason = fields.String(allow_none=True)
+
+class PrepareRegisterReq(FlaskForm):
+    """准备注册请求结构"""
+    email = StringField('email', validators=[
+        DataRequired("邮箱不能为空"),
+        Email("邮箱格式错误"),
+        Length(min=3, max=254, message="邮箱长度在3~254之间")
+    ])
+    password = StringField('password', validators=[
+        DataRequired("密码不能为空"),
+        regexp(regex=password_pattern, message="密码最少包含一个字母,一个数字,并且长度在8~16")
+    ])
+
+
+class VerifyRegisterReq(FlaskForm):
+    """验证码注册请求结构"""
+    email = StringField('email', validators=[
+        DataRequired("邮箱不能为空"),
+        Email("邮箱格式错误"),
+        Length(min=3, max=254, message="邮箱长度在3~254之间")
+    ])
+    password = StringField('password', validators=[
+        DataRequired("密码不能为空"),
+        regexp(regex=password_pattern, message="密码最少包含一个字母,一个数字,并且长度在8~16")
+    ])
+    code = StringField('code', validators=[
+        DataRequired("验证码不能为空"),
+        Length(min=6, max=6, message="验证码必须是6位数字")
+    ])
+
+class SendResetCodeReq(FlaskForm):
+    """发送重置验证码请求结构"""
+    email = StringField('email', validators=[
+        DataRequired("邮箱不能为空"),
+        Email("邮箱格式错误"),
+        Length(min=3, max=254, message="邮箱长度在3~254之间")
+    ])
+
+class ResetPasswordReq(FlaskForm):
+    """重置密码请求结构"""
+    email = StringField('email', validators=[
+        DataRequired("邮箱不能为空"),
+        Email("邮箱格式错误"),
+    ])
+    code = StringField('code', validators=[
+        DataRequired("验证码不能为空"),
+        Length(min=6, max=6, message="验证码必须是6位数字")
+    ])
+    new_password = StringField('new_password', validators=[
+        DataRequired("新密码不能为空"),
+        regexp(regex=password_pattern, message="密码最少包含一个字母,一个数字,并且长度在8~16")
+    ])
+
+
+class VerifyLoginChallengeReq(FlaskForm):
+    """登录二次验证请求结构"""
+    challenge_id = StringField('challenge_id', validators=[
+        DataRequired("challenge_id 不能为空"),
+        Length(min=1, max=128, message="challenge_id 参数错误"),
+    ])
+    code = StringField('code', validators=[
+        DataRequired("验证码不能为空"),
+        Length(min=6, max=6, message="验证码必须是6位数字")
+    ])
+
+
+class ResendLoginChallengeReq(FlaskForm):
+    """重发登录二次验证验证码请求结构"""
+    challenge_id = StringField('challenge_id', validators=[
+        DataRequired("challenge_id 不能为空"),
+        Length(min=1, max=128, message="challenge_id 参数错误"),
+    ])
+
+
+class SendLoginCodeReq(FlaskForm):
+    """发送邮箱登录验证码请求结构"""
+    email = StringField('email', validators=[
+        DataRequired("邮箱不能为空"),
+        Email("邮箱格式错误"),
+        Length(min=3, max=254, message="邮箱长度在3~254之间")
+    ])
+
+
+class LoginByEmailCodeReq(FlaskForm):
+    """邮箱验证码登录请求结构"""
+    email = StringField('email', validators=[
+        DataRequired("邮箱不能为空"),
+        Email("邮箱格式错误"),
+        Length(min=3, max=254, message="邮箱长度在3~254之间")
+    ])
+    code = StringField('code', validators=[
+        DataRequired("验证码不能为空"),
+        Length(min=6, max=6, message="验证码必须是6位数字")
+    ])
+
+
+class SendSmsCodeReq(FlaskForm):
+    """发送短信验证码请求结构"""
+    phone = StringField('phone', validators=[
+        DataRequired("手机号不能为空"),
+        Length(min=11, max=11, message="手机号必须是11位数字"),
+        regexp(regex=r'^1[3-9]\d{9}$', message="手机号格式错误")
+    ])
+
+
+class LoginByPhoneCodeReq(FlaskForm):
+    """手机号验证码登录请求结构"""
+    phone = StringField('phone', validators=[
+        DataRequired("手机号不能为空"),
+        Length(min=11, max=11, message="手机号必须是11位数字"),
+        regexp(regex=r'^1[3-9]\d{9}$', message="手机号格式错误")
+    ])
+    code = StringField('code', validators=[
+        DataRequired("验证码不能为空"),
+        Length(min=6, max=6, message="验证码必须是6位数字")
+    ])

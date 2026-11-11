@@ -1,0 +1,4 @@
+name: google_serper
+label: 谷歌Serper搜索
+description: Search the web with Google Serper using a search query.
+params: []

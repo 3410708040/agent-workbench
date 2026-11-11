@@ -1,0 +1,15 @@
+name: prompt_optimizer
+label: Prompt 优化
+description: 优化用户的 prompt，让大模型回复更准确、更高效
+params:
+  - name: prompt
+    label: 原始 Prompt
+    type: string
+    required: true
+    description: 需要优化的原始 prompt 内容
+  - name: target
+    label: 目标场景
+    type: string
+    required: false
+    default: general
+    description: 目标场景：general 通用，code 编程，writing 写作，analysis 分析

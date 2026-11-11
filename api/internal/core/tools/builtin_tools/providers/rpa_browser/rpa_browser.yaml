@@ -1,0 +1,29 @@
+name: rpa_browser
+label: RPA浏览器自动化
+description: 浏览器自动化工具，支持打开网站、点击元素、输入文本、Boss直聘自动投递
+params:
+  - name: url
+    label: 网址
+    type: string
+    required: true
+    description: 要打开的网址
+  - name: selector
+    label: 元素选择器
+    type: string
+    required: true
+    description: CSS元素选择器
+  - name: text
+    label: 文本内容
+    type: string
+    required: true
+    description: 要输入的文本
+  - name: job_name
+    label: 岗位名称
+    type: string
+    required: true
+    description: 要投递的岗位名称
+  - name: greeting_text
+    label: 招呼话术
+    type: string
+    required: true
+    description: 要发送的招呼话术内容

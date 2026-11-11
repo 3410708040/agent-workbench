@@ -1,0 +1,9 @@
+name: token_counter
+label: Token 统计
+description: 统计给定文本的 token 数量估算值，帮助了解对话消耗
+params:
+  - name: text
+    label: 文本内容
+    type: string
+    required: true
+    description: 需要统计 token 数量的文本

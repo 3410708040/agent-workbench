@@ -1,0 +1,14 @@
+name: boss_auto_delivery
+label: Boss直聘自动投递
+description: 在Boss直聘上自动投递简历：打开岗位→点击沟通→发送话术→发送简历
+params:
+  - name: job_name
+    label: 岗位名称
+    type: string
+    required: true
+    description: 要投递的岗位名称
+  - name: greeting_text
+    label: 招呼话术
+    type: string
+    required: true
+    description: 要发送的招呼话术内容

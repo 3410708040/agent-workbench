@@ -1,0 +1,9 @@
+name: open_website
+label: 打开网站
+description: 打开指定网址的浏览器页面（使用Edge浏览器）
+params:
+  - name: url
+    label: 网址
+    type: string
+    required: true
+    description: 要打开的网址

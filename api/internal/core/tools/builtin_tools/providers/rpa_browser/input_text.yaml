@@ -1,0 +1,14 @@
+name: input_text
+label: 输入文本
+description: 在输入框中输入文本内容
+params:
+  - name: selector
+    label: 选择器
+    type: string
+    required: true
+    description: 输入框CSS选择器
+  - name: text
+    label: 文本内容
+    type: string
+    required: true
+    description: 要输入的文本

@@ -1,0 +1,15 @@
+name: history_compressor
+label: 对话历史压缩
+description: 压缩长对话历史，保留关键信息和结论，节省 token 消耗
+params:
+  - name: history
+    label: 对话历史
+    type: string
+    required: true
+    description: 需要压缩的对话历史文本
+  - name: preserve_key_points
+    label: 保留关键点
+    type: boolean
+    required: false
+    default: true
+    description: 是否保留关键要点和结论
