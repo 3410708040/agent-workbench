@@ -75,7 +75,7 @@ openagent/
 ├── ui/                      # Vue 3 前端
 │   └── src/                 # views / components / stores / services / router / ...
 ├── docker/
-└── docs/
+└── scripts/                 # 部署与校验脚本
 ```
 
 ## 本地运行
